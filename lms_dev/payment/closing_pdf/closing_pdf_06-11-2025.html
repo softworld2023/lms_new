@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Cash In / Cash Out — Print</title>
+<style>
+  body{margin:10px;font-family:Arial,Helvetica,sans-serif}
+  .tbl-excel { border-collapse: collapse; border: 3px solid #000; }
+  .tbl-excel td { border: 1px solid #000; height: 24px; line-height: 24px; text-align: center; white-space: nowrap; }
+  .tbl-excel input.cell {
+    border: none; outline: none; width: 98%; height: 90%;
+    text-align: center; font: 12px Arial, Helvetica, sans-serif;
+    background: transparent; padding: 0 2px;
+  }
+  tr {
+    border: 1px solid black !important;
+  }
+  .row { display:flex; gap:20px; align-items:flex-start; }
+  .col { display:flex; flex-direction:column; gap:20px; }
+  @media print {
+    @page { size: landscape; margin: 8mm; }
+    a, button { display:none !important; }
+  }
+</style>
+</head>
+<body>
+  <!-- header -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+    <div style="font-size:18px;font-weight:bold;">Cash In / Cash Out</div>
+    <div>Date: <b>2025-11-06</b></div>
+  </div>
+
+  <!-- grid: (t1 over t4) | t2 | t5 -->
+  <div class="row">
+    <div class="col">
+      <table id="table1" class="tbl-excel" style="width:600px;"><tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: right;">Time:&nbsp;</td>
+                                <td><input type="text" id="time" class="cell" value=""></td>
+                                <td style="color: red; font-size: 10px;">locker out money</td>
+                            </tr>
+                            <tr>
+                                <td style="color: red;">locker OUT +</td>
+                                <td><input type="text" class="cell" id="b4" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="c4" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="d4" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="e4" oninput="input(this);" value=""></td>
+                                <td id="f4" style="background-color: #ffc499;"></td>
+                            </tr><tr><td><input type="text" style="text-align: left;background-color: #ffc499;" class="cell" id="a5" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="b5" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="c5" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="d5" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="e5" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="f5" oninput="input(this);" value="50427"></td>
+                                      </tr><tr><td><input type="text" class="cell" id="a6" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="b6" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="c6" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="d6" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="e6" oninput="input(this);" value=""></td>
+                                      <td><input type="text" class="cell" id="f6" oninput="input(this);" value=""></td>
+                                      </tr><tr><td style="text-align: left;"><b>PL:</b></td>
+                                      <td id="b7" style="background-color: #f06b6b;">11</td>
+                                      <td><b>100</b></td>
+                                      <td>RM</td>
+                                      <td><input type="text" class="cell" id="e7" oninput="input(this);" value=""></td>
+                                      <td id="f7" style="background-color: #ffc499;">50427</td>
+                                      </tr><tr><td style="text-align: left;"><b>MBB:</b></td>
+                                      <td id="b8" style="background-color: #bfecc3;">200</td>
+                                      <td><b>50</b></td>
+                                      <td>RM</td>
+                                      <td><input type="text" class="cell" id="e8" oninput="input(this);" value=""></td>
+                                      <td></td>
+                                      </tr><tr>
+                                <td style="text-align: left;"><b>PBE:</b></td>
+                                <td id="b9" style="background-color: #7fd6e5;">400</td>
+                                <td><b>10</b></td>
+                                <td>RM</td>
+                                <td><input type="text" class="cell" id="e9" oninput="input(this);" value=""></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">EXPENSES:</td>
+                                <td></td>
+                                <td><b>5</b></td>
+                                <td>RM</td>
+                                <td><input type="text" class="cell" id="e10" oninput="input(this);" value=""></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="b11" oninput="input(this);" value=""></td>
+                                <td><b>1</b></td>
+                                <td>RM</td>
+                                <td><input type="text" class="cell" id="e11" oninput="input(this);" value=""></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="b12" oninput="input(this);" value=""></td>
+                                <td>TOTAL</td>
+                                <td>RM</td>
+                                <td id="e12" style="background-color: #ffc499;"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="b13" oninput="input(this);" value=""></td>
+                                <td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="b14" oninput="input(this);" value=""></td>
+                                <td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                <td><input type="text" class="cell" id="b15" oninput="input(this);" value=""></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr><tr>
+                                    <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                    <td><input type="text" class="cell" id="b16" oninput="input(this);" value=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr><tr>
+                                    <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                    <td><input type="text" class="cell" id="b17" oninput="input(this);" value=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr><tr>
+                                    <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                    <td><input type="text" class="cell" id="b18" oninput="input(this);" value=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr><tr>
+                                    <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                    <td><input type="text" class="cell" id="b19" oninput="input(this);" value=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr><tr>
+                                    <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                                    <td><input type="text" class="cell" id="b20" oninput="input(this);" value=""></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr><tr>
+                                <td>TOTAL EXP</td>
+                                <td id="b21" style="background-color: #ffc499;"></td>
+                                <td></td>
+                                <td>TOTAL SUM</td>
+                                <td id="e21" style="background-color: #ffc499;">50427</td>
+                                <td></td>
+                            </tr></table>
+      <table id="table4" class="tbl-excel" style="width:600px;"><tr>
+                            <td colspan="6" style="background:#ff0000;color:#fff;text-align:center;font-size:28px;font-weight:bold;padding:8px 0;">
+                                ONG TIAP2 HARI
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="6" id="b28" style="text-align:center;font-size:46px;font-weight:bold;padding:16px 0;">11</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="font-weight:bold;">kena isi</td>
+                        </tr>
+
+                        <!-- Readouts (JS will fill from DB / carry-forward policy) -->
+                        <tr>
+                            <td colspan="2" style="white-space:nowrap;">Before date MJ MBB</td>
+                            <td id="val_mbb" contenteditable="true" style="width:120px;text-align:center;border-bottom:1px;">200</td>
+                            <td colspan="2" style="white-space:nowrap;">Before date MJ PBE</td>
+                            <td id="val_pbe" contenteditable="true" style="width:120px;text-align:center;">400</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="white-space:nowrap;">Before date PL</td>
+                            <td id="val_pl" contenteditable="true" style="width:120px;text-align:center;">500</td>
+                            <td colspan="2"></td><td></td>
+                        </tr></table>
+    </div>
+
+    <table id="table2" class="tbl-excel" style="width:800px;"><tr>
+                                <td colspan="4" style="background-color:#5adbf7;"><b>MONTHLY CASH OUT (1)</b></td>
+                                <td></td>
+                                <td style="text-align:right;">Date:</td>
+                                <td colspan="2"><input type="text" class="cell" style="text-align:left;" oninput="input(this);" value=""></td>
+                                <td></td>
+                            </tr>
+                            <tr><td colspan="9"></td></tr>
+                            <tr class="co-header">
+                                <td><b>Date</b></td>
+                                <td><b>Agree No.</b></td>
+                                <td><b>ID No.</b></td>
+                                <td><b>LOAN AMOUNT</b></td>
+                                <td><b>AMOUNT</b></td>
+                                <td><b>sd</b></td>
+                                <td><b>Payout</b></td>
+                                <td><b>Month</b></td>
+                                <td><b>staff name</b></td>
+                            </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25004"></td>
+                        <td><input type="text" class="cell" readonly="" value="0821"></td>
+                        <td><input type="text" class="cell" readonly="" id="j6" value="270"></td>
+                        <td><input type="text" class="cell" readonly="" id="k6" value="243"></td>
+                        <td><input type="text" class="cell" readonly="" id="l6" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m6" value="238"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP23382"></td>
+                        <td><input type="text" class="cell" readonly="" value="0601"></td>
+                        <td><input type="text" class="cell" readonly="" id="j7" value="300"></td>
+                        <td><input type="text" class="cell" readonly="" id="k7" value="270"></td>
+                        <td><input type="text" class="cell" readonly="" id="l7" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m7" value="265"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24299"></td>
+                        <td><input type="text" class="cell" readonly="" value="0161"></td>
+                        <td><input type="text" class="cell" readonly="" id="j8" value="500"></td>
+                        <td><input type="text" class="cell" readonly="" id="k8" value="450"></td>
+                        <td><input type="text" class="cell" readonly="" id="l8" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m8" value="445"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25039"></td>
+                        <td><input type="text" class="cell" readonly="" value="0468"></td>
+                        <td><input type="text" class="cell" readonly="" id="j9" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k9" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l9" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m9" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25087"></td>
+                        <td><input type="text" class="cell" readonly="" value="1062"></td>
+                        <td><input type="text" class="cell" readonly="" id="j10" value="700"></td>
+                        <td><input type="text" class="cell" readonly="" id="k10" value="630"></td>
+                        <td><input type="text" class="cell" readonly="" id="l10" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m10" value="625"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25036"></td>
+                        <td><input type="text" class="cell" readonly="" value="0024"></td>
+                        <td><input type="text" class="cell" readonly="" id="j11" value="500"></td>
+                        <td><input type="text" class="cell" readonly="" id="k11" value="450"></td>
+                        <td><input type="text" class="cell" readonly="" id="l11" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m11" value="445"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="2507-009"></td>
+                        <td><input type="text" class="cell" readonly="" value="0785"></td>
+                        <td><input type="text" class="cell" readonly="" id="j12" value="2000"></td>
+                        <td><input type="text" class="cell" readonly="" id="k12" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="l12" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m12" value="1795"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24196"></td>
+                        <td><input type="text" class="cell" readonly="" value="0706"></td>
+                        <td><input type="text" class="cell" readonly="" id="j13" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="k13" value="45"></td>
+                        <td><input type="text" class="cell" readonly="" id="l13" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m13" value="40"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25125"></td>
+                        <td><input type="text" class="cell" readonly="" value="0230"></td>
+                        <td><input type="text" class="cell" readonly="" id="j14" value="400"></td>
+                        <td><input type="text" class="cell" readonly="" id="k14" value="360"></td>
+                        <td><input type="text" class="cell" readonly="" id="l14" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m14" value="355"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ 0254"></td>
+                        <td><input type="text" class="cell" readonly="" value="0647"></td>
+                        <td><input type="text" class="cell" readonly="" id="j15" value="1900"></td>
+                        <td><input type="text" class="cell" readonly="" id="k15" value="1710"></td>
+                        <td><input type="text" class="cell" readonly="" id="l15" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m15" value="1705"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25133"></td>
+                        <td><input type="text" class="cell" readonly="" value="0528"></td>
+                        <td><input type="text" class="cell" readonly="" id="j16" value="1000"></td>
+                        <td><input type="text" class="cell" readonly="" id="k16" value="900"></td>
+                        <td><input type="text" class="cell" readonly="" id="l16" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m16" value="895"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP23114"></td>
+                        <td><input type="text" class="cell" readonly="" value="0849"></td>
+                        <td><input type="text" class="cell" readonly="" id="j17" value="150"></td>
+                        <td><input type="text" class="cell" readonly="" id="k17" value="135"></td>
+                        <td><input type="text" class="cell" readonly="" id="l17" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m17" value="130"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0101"></td>
+                        <td><input type="text" class="cell" readonly="" value="0456"></td>
+                        <td><input type="text" class="cell" readonly="" id="j18" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k18" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l18" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m18" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25080"></td>
+                        <td><input type="text" class="cell" readonly="" value="0144"></td>
+                        <td><input type="text" class="cell" readonly="" id="j19" value="300"></td>
+                        <td><input type="text" class="cell" readonly="" id="k19" value="270"></td>
+                        <td><input type="text" class="cell" readonly="" id="l19" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m19" value="265"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="2507-010"></td>
+                        <td><input type="text" class="cell" readonly="" value="0254"></td>
+                        <td><input type="text" class="cell" readonly="" id="j20" value="1200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k20" value="1080"></td>
+                        <td><input type="text" class="cell" readonly="" id="l20" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m20" value="1075"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25176"></td>
+                        <td><input type="text" class="cell" readonly="" value="0097"></td>
+                        <td><input type="text" class="cell" readonly="" id="j21" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k21" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l21" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m21" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0312"></td>
+                        <td><input type="text" class="cell" readonly="" value="0859"></td>
+                        <td><input type="text" class="cell" readonly="" id="j22" value="350"></td>
+                        <td><input type="text" class="cell" readonly="" id="k22" value="315"></td>
+                        <td><input type="text" class="cell" readonly="" id="l22" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m22" value="310"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25079"></td>
+                        <td><input type="text" class="cell" readonly="" value="0999"></td>
+                        <td><input type="text" class="cell" readonly="" id="j23" value="2000"></td>
+                        <td><input type="text" class="cell" readonly="" id="k23" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="l23" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m23" value="1795"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24005"></td>
+                        <td><input type="text" class="cell" readonly="" value="0286"></td>
+                        <td><input type="text" class="cell" readonly="" id="j24" value="350"></td>
+                        <td><input type="text" class="cell" readonly="" id="k24" value="315"></td>
+                        <td><input type="text" class="cell" readonly="" id="l24" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m24" value="310"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24310"></td>
+                        <td><input type="text" class="cell" readonly="" value="0402"></td>
+                        <td><input type="text" class="cell" readonly="" id="j25" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="k25" value="90"></td>
+                        <td><input type="text" class="cell" readonly="" id="l25" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m25" value="85"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0191"></td>
+                        <td><input type="text" class="cell" readonly="" value="0170"></td>
+                        <td><input type="text" class="cell" readonly="" id="j26" value="500"></td>
+                        <td><input type="text" class="cell" readonly="" id="k26" value="450"></td>
+                        <td><input type="text" class="cell" readonly="" id="l26" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m26" value="445"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0303"></td>
+                        <td><input type="text" class="cell" readonly="" value="0151"></td>
+                        <td><input type="text" class="cell" readonly="" id="j27" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k27" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l27" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m27" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0315"></td>
+                        <td><input type="text" class="cell" readonly="" value="0951"></td>
+                        <td><input type="text" class="cell" readonly="" id="j28" value="1000"></td>
+                        <td><input type="text" class="cell" readonly="" id="k28" value="900"></td>
+                        <td><input type="text" class="cell" readonly="" id="l28" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m28" value="895"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24088"></td>
+                        <td><input type="text" class="cell" readonly="" value="0312"></td>
+                        <td><input type="text" class="cell" readonly="" id="j29" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="k29" value="90"></td>
+                        <td><input type="text" class="cell" readonly="" id="l29" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m29" value="85"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25009"></td>
+                        <td><input type="text" class="cell" readonly="" value="0709"></td>
+                        <td><input type="text" class="cell" readonly="" id="j30" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k30" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l30" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m30" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24369"></td>
+                        <td><input type="text" class="cell" readonly="" value="1106"></td>
+                        <td><input type="text" class="cell" readonly="" id="j31" value="750"></td>
+                        <td><input type="text" class="cell" readonly="" id="k31" value="675"></td>
+                        <td><input type="text" class="cell" readonly="" id="l31" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m31" value="670"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="04 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24364"></td>
+                        <td><input type="text" class="cell" readonly="" value="0117"></td>
+                        <td><input type="text" class="cell" readonly="" id="j32" value="300"></td>
+                        <td><input type="text" class="cell" readonly="" id="k32" value="270"></td>
+                        <td><input type="text" class="cell" readonly="" id="l32" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m32" value="265"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP23361"></td>
+                        <td><input type="text" class="cell" readonly="" value="0919"></td>
+                        <td><input type="text" class="cell" readonly="" id="j33" value="1900"></td>
+                        <td><input type="text" class="cell" readonly="" id="k33" value="1710"></td>
+                        <td><input type="text" class="cell" readonly="" id="l33" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m33" value="1705"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24316"></td>
+                        <td><input type="text" class="cell" readonly="" value="0805"></td>
+                        <td><input type="text" class="cell" readonly="" id="j34" value="200"></td>
+                        <td><input type="text" class="cell" readonly="" id="k34" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="l34" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m34" value="175"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP24311"></td>
+                        <td><input type="text" class="cell" readonly="" value="1078"></td>
+                        <td><input type="text" class="cell" readonly="" id="j35" value="1000"></td>
+                        <td><input type="text" class="cell" readonly="" id="k35" value="900"></td>
+                        <td><input type="text" class="cell" readonly="" id="l35" value="5"></td>
+                        <td><input type="text" class="cell" readonly="" id="m35" value="895"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td style="display:none;"><input type="hidden" id="hidden_f5" value="50427"></td>
+                        <td style="display:none;"><input type="hidden" id="total_m39_all" value="383385"></td>
+                        <td></td>
+                        <td id="j39" style="background-color:#4285f4;">14670</td>
+                        <td id="k39" style="background-color:#4285f4;">13203</td>
+                        <td id="l39" style="background-color:#4285f4;">125</td>
+                        <td id="m39" style="background-color:#4285f4;">13078</td>
+                        <td></td><td></td>
+                    </tr><tr><td colspan="9" style="text-align:center;"><strong>[1]</strong> <a href="#" onclick="loadTable(2, 2)" class="js-pager" style="cursor: pointer;">2</a> <a href="#" onclick="loadTable(2, 3)" class="js-pager" style="cursor: pointer;">3</a> <a href="#" onclick="loadTable(2, 4)" class="js-pager" style="cursor: pointer;">4</a> <a href="#" onclick="loadTable(2, 5)" class="js-pager" style="cursor: pointer;">5</a> <a href="#" onclick="loadTable(2, 6)" class="js-pager" style="cursor: pointer;">6</a> <a href="#" onclick="loadTable(2, 7)" class="js-pager" style="cursor: pointer;">7</a> <a href="#" onclick="loadTable(2, 8)" class="js-pager" style="cursor: pointer;">8</a> <a href="#" onclick="loadTable(2, 9)" class="js-pager" style="cursor: pointer;">9</a> <a href="#" onclick="loadTable(2, 10)" class="js-pager" style="cursor: pointer;">10</a> <a href="#" onclick="loadTable(2, 11)" class="js-pager" style="cursor: pointer;">11</a> <a href="#" onclick="loadTable(2, 12)" class="js-pager" style="cursor: pointer;">12</a> </td></tr></table>
+    <table id="table5" class="tbl-excel" style="width:800px;"><tr>
+                        <td colspan="4" style="background-color:#ffff00;"><b>INS CASH OUT (1)</b></td>
+                        <td></td>
+                        <td style="text-align:right;">Date:</td>
+                        <td colspan="2"><input type="text" class="cell" style="text-align:left;" oninput="input(this);" value=""></td>
+                        <td></td>
+                        </tr>
+                        <tr><td colspan="9"></td></tr>
+                        <tr class="co-header">
+                        <td><b>Date</b></td>
+                        <td><b>Agree No.</b></td>
+                        <td><b>ID No.</b></td>
+                        <td><b>LOAN AMOUNT</b></td>
+                        <td><b>AMOUNT</b></td>
+                        <td><b>sd</b></td>
+                        <td><b>Payout</b></td>
+                        <td><b>Month</b></td>
+                        <td><b>Staff Name</b></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="02 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25234"></td>
+                        <td><input type="text" class="cell" readonly="" value="0922"></td>
+                        <td><input type="text" class="cell" readonly="" id="s6" value="7000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t6" value="6300"></td>
+                        <td><input type="text" class="cell" readonly="" id="u6" value="140"></td>
+                        <td><input type="text" class="cell" readonly="" id="v6" value="6160"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25235"></td>
+                        <td><input type="text" class="cell" readonly="" value="0895"></td>
+                        <td><input type="text" class="cell" readonly="" id="s7" value="7000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t7" value="6300"></td>
+                        <td><input type="text" class="cell" readonly="" id="u7" value="140"></td>
+                        <td><input type="text" class="cell" readonly="" id="v7" value="6160"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="03 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0322"></td>
+                        <td><input type="text" class="cell" readonly="" value="0741"></td>
+                        <td><input type="text" class="cell" readonly="" id="s8" value="1500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t8" value="1350"></td>
+                        <td><input type="text" class="cell" readonly="" id="u8" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v8" value="1300"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25236"></td>
+                        <td><input type="text" class="cell" readonly="" value="0576"></td>
+                        <td><input type="text" class="cell" readonly="" id="s9" value="19000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t9" value="17100"></td>
+                        <td><input type="text" class="cell" readonly="" id="u9" value="380"></td>
+                        <td><input type="text" class="cell" readonly="" id="v9" value="16720"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25238"></td>
+                        <td><input type="text" class="cell" readonly="" value="1101"></td>
+                        <td><input type="text" class="cell" readonly="" id="s10" value="3500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t10" value="3150"></td>
+                        <td><input type="text" class="cell" readonly="" id="u10" value="70"></td>
+                        <td><input type="text" class="cell" readonly="" id="v10" value="3080"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25237"></td>
+                        <td><input type="text" class="cell" readonly="" value="0732"></td>
+                        <td><input type="text" class="cell" readonly="" id="s11" value="5000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t11" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="u11" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="v11" value="4400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="05 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0323"></td>
+                        <td><input type="text" class="cell" readonly="" value="0842"></td>
+                        <td><input type="text" class="cell" readonly="" id="s12" value="1000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t12" value="900"></td>
+                        <td><input type="text" class="cell" readonly="" id="u12" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v12" value="850"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="07 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0324"></td>
+                        <td><input type="text" class="cell" readonly="" value="0456"></td>
+                        <td><input type="text" class="cell" readonly="" id="s13" value="2000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t13" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="u13" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v13" value="1750"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="07 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25240"></td>
+                        <td><input type="text" class="cell" readonly="" value="1224"></td>
+                        <td><input type="text" class="cell" readonly="" id="s14" value="4000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t14" value="3600"></td>
+                        <td><input type="text" class="cell" readonly="" id="u14" value="80"></td>
+                        <td><input type="text" class="cell" readonly="" id="v14" value="3520"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="07 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25239"></td>
+                        <td><input type="text" class="cell" readonly="" value="0737"></td>
+                        <td><input type="text" class="cell" readonly="" id="s15" value="5000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t15" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="u15" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="v15" value="4400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="08 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0325"></td>
+                        <td><input type="text" class="cell" readonly="" value="0998"></td>
+                        <td><input type="text" class="cell" readonly="" id="s16" value="3000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t16" value="2700"></td>
+                        <td><input type="text" class="cell" readonly="" id="u16" value="60"></td>
+                        <td><input type="text" class="cell" readonly="" id="v16" value="2640"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="08 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0326"></td>
+                        <td><input type="text" class="cell" readonly="" value="0066"></td>
+                        <td><input type="text" class="cell" readonly="" id="s17" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="t17" value="1620"></td>
+                        <td><input type="text" class="cell" readonly="" id="u17" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v17" value="1570"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="08 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25241"></td>
+                        <td><input type="text" class="cell" readonly="" value="1225"></td>
+                        <td><input type="text" class="cell" readonly="" id="s18" value="3500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t18" value="3150"></td>
+                        <td><input type="text" class="cell" readonly="" id="u18" value="70"></td>
+                        <td><input type="text" class="cell" readonly="" id="v18" value="3080"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="09 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0327"></td>
+                        <td><input type="text" class="cell" readonly="" value="0765"></td>
+                        <td><input type="text" class="cell" readonly="" id="s19" value="2600"></td>
+                        <td><input type="text" class="cell" readonly="" id="t19" value="2340"></td>
+                        <td><input type="text" class="cell" readonly="" id="u19" value="52"></td>
+                        <td><input type="text" class="cell" readonly="" id="v19" value="2288"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="09 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25242"></td>
+                        <td><input type="text" class="cell" readonly="" value="1096"></td>
+                        <td><input type="text" class="cell" readonly="" id="s20" value="30000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t20" value="27000"></td>
+                        <td><input type="text" class="cell" readonly="" id="u20" value="600"></td>
+                        <td><input type="text" class="cell" readonly="" id="v20" value="26400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="09 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0329"></td>
+                        <td><input type="text" class="cell" readonly="" value="1191"></td>
+                        <td><input type="text" class="cell" readonly="" id="s21" value="1900"></td>
+                        <td><input type="text" class="cell" readonly="" id="t21" value="1710"></td>
+                        <td><input type="text" class="cell" readonly="" id="u21" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v21" value="1660"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="10 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25243"></td>
+                        <td><input type="text" class="cell" readonly="" value="0776"></td>
+                        <td><input type="text" class="cell" readonly="" id="s22" value="5000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t22" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="u22" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="v22" value="4400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="10 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25244"></td>
+                        <td><input type="text" class="cell" readonly="" value="0919"></td>
+                        <td><input type="text" class="cell" readonly="" id="s23" value="5000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t23" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="u23" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="v23" value="4400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="11 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25245"></td>
+                        <td><input type="text" class="cell" readonly="" value="1226"></td>
+                        <td><input type="text" class="cell" readonly="" id="s24" value="1200"></td>
+                        <td><input type="text" class="cell" readonly="" id="t24" value="1080"></td>
+                        <td><input type="text" class="cell" readonly="" id="u24" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v24" value="1030"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="14 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0330"></td>
+                        <td><input type="text" class="cell" readonly="" value="0097"></td>
+                        <td><input type="text" class="cell" readonly="" id="s25" value="1500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t25" value="1350"></td>
+                        <td><input type="text" class="cell" readonly="" id="u25" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v25" value="1300"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="15 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25246"></td>
+                        <td><input type="text" class="cell" readonly="" value="1227"></td>
+                        <td><input type="text" class="cell" readonly="" id="s26" value="7000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t26" value="6300"></td>
+                        <td><input type="text" class="cell" readonly="" id="u26" value="140"></td>
+                        <td><input type="text" class="cell" readonly="" id="v26" value="6160"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="16 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25247"></td>
+                        <td><input type="text" class="cell" readonly="" value="1228"></td>
+                        <td><input type="text" class="cell" readonly="" id="s27" value="8000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t27" value="7200"></td>
+                        <td><input type="text" class="cell" readonly="" id="u27" value="160"></td>
+                        <td><input type="text" class="cell" readonly="" id="v27" value="7040"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="17 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25248"></td>
+                        <td><input type="text" class="cell" readonly="" value="0148"></td>
+                        <td><input type="text" class="cell" readonly="" id="s28" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t28" value="4050"></td>
+                        <td><input type="text" class="cell" readonly="" id="u28" value="90"></td>
+                        <td><input type="text" class="cell" readonly="" id="v28" value="3960"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="18 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0321"></td>
+                        <td><input type="text" class="cell" readonly="" value="0472"></td>
+                        <td><input type="text" class="cell" readonly="" id="s29" value="2200"></td>
+                        <td><input type="text" class="cell" readonly="" id="t29" value="1980"></td>
+                        <td><input type="text" class="cell" readonly="" id="u29" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v29" value="1930"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="18 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25249"></td>
+                        <td><input type="text" class="cell" readonly="" value="1097"></td>
+                        <td><input type="text" class="cell" readonly="" id="s30" value="5000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t30" value="4500"></td>
+                        <td><input type="text" class="cell" readonly="" id="u30" value="100"></td>
+                        <td><input type="text" class="cell" readonly="" id="v30" value="4400"></td>
+                        <td><input type="text" class="cell" readonly="" value="Aug"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="19 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25252"></td>
+                        <td><input type="text" class="cell" readonly="" value="1229"></td>
+                        <td><input type="text" class="cell" readonly="" id="s31" value="2000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t31" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="u31" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v31" value="1750"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="21 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0332"></td>
+                        <td><input type="text" class="cell" readonly="" value="1099"></td>
+                        <td><input type="text" class="cell" readonly="" id="s32" value="1200"></td>
+                        <td><input type="text" class="cell" readonly="" id="t32" value="1080"></td>
+                        <td><input type="text" class="cell" readonly="" id="u32" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v32" value="1030"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="21 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0331"></td>
+                        <td><input type="text" class="cell" readonly="" value="0183"></td>
+                        <td><input type="text" class="cell" readonly="" id="s33" value="2000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t33" value="1800"></td>
+                        <td><input type="text" class="cell" readonly="" id="u33" value="50"></td>
+                        <td><input type="text" class="cell" readonly="" id="v33" value="1750"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="21 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="BP25251"></td>
+                        <td><input type="text" class="cell" readonly="" value="1106"></td>
+                        <td><input type="text" class="cell" readonly="" id="s34" value="9000"></td>
+                        <td><input type="text" class="cell" readonly="" id="t34" value="8100"></td>
+                        <td><input type="text" class="cell" readonly="" id="u34" value="180"></td>
+                        <td><input type="text" class="cell" readonly="" id="v34" value="7920"></td>
+                        <td><input type="text" class="cell" readonly="" value="Jul"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td><input type="text" class="cell" readonly="" value="21 Jul 2025"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ0333"></td>
+                        <td><input type="text" class="cell" readonly="" value="0246"></td>
+                        <td><input type="text" class="cell" readonly="" id="s35" value="6500"></td>
+                        <td><input type="text" class="cell" readonly="" id="t35" value="5850"></td>
+                        <td><input type="text" class="cell" readonly="" id="u35" value="130"></td>
+                        <td><input type="text" class="cell" readonly="" id="v35" value="5720"></td>
+                        <td><input type="text" class="cell" readonly="" value="Aug"></td>
+                        <td><input type="text" class="cell" readonly="" value="MJ MAJUSAMA STAFF"></td>
+                        </tr><tr>
+                        <td style="display:none;"><input type="hidden" id="total_v39_all" value="163918"></td>
+                        <td></td><td></td>
+                        <td id="s39" style="background-color:#4285f4;">137200</td>
+                        <td id="t39" style="background-color:#4285f4;">123480</td>
+                        <td id="u39" style="background-color:#4285f4;">2882</td>
+                        <td id="v39" style="background-color:#4285f4;">120598</td>
+                        <td></td><td></td>
+                    </tr><tr><td colspan="9" style="text-align:center;"><b>[1]</b> <a href="#" onclick="loadTable(5, 2, 30); return false;" class="js-pager" style="cursor: pointer;">2</a> <a href="#" onclick="loadTable(5, 3, 30); return false;" class="js-pager" style="cursor: pointer;">3</a> </td></tr></table>
+  </div>
+
+  <!-- second row: t7 | t8 -->
+  <div class="row" style="margin-top:20px;">
+    <table id="table7" class="tbl-excel" style="width:1600px;"><tr>
+                        <td style="width: 4%;" class="band-col band-blue" rowspan="20"></td>
+                        <td style="width: 4%;" class="band-col band-red" rowspan="20"></td>
+                        <td style="width: 4%;" class="band-col band-green" rowspan="20"></td>
+
+                        <td class="hdr-plus">+ PL</td>
+                        <td class="hdr-minus">- PL</td>
+                        <td class="hdr-nama-red">NAMA</td>
+
+                        <td class="hdr-plus">+ PL</td>
+                        <td class="hdr-minus">- PL</td>
+                        <td class="hdr-nama-red">NAMA</td>
+
+                        <td class="hdr-plus">+ PL</td>
+                        <td class="hdr-minus">- PL</td>
+                        <td class="hdr-nama-red">NAMA</td>
+
+                        <td class="hdr-plus">+ MJ / MBB</td>
+                        <td class="hdr-minus">- MJ / MBB</td>
+                        <td class="hdr-nama-mint">NAMA</td>
+
+                        <td class="hdr-plus">+ MJ PBE</td>
+                        <td class="hdr-minus">- MJ PBE</td>
+                        <td class="hdr-nama-cyan">NAMA</td>
+                    </tr><tr>
+
+                        <td><input id="d40" class="cell" oninput="input(this);" value="200"></td>
+                        <td><input id="e40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f40" class="cell" value="test"></td>
+
+                        <td><input id="g40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i40" class="cell" value=""></td>
+
+                        <td><input id="j40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l40" class="cell" value=""></td>
+
+                        <td><input id="m40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o40" class="cell" value=""></td>
+
+                        <td><input id="p40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q40" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r40" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d41" class="cell" oninput="input(this);" value="200"></td>
+                        <td><input id="e41" class="cell" oninput="input(this);" value="1200"></td>
+                        <td><input id="f41" class="cell" value=""></td>
+
+                        <td><input id="g41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i41" class="cell" value=""></td>
+
+                        <td><input id="j41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l41" class="cell" value=""></td>
+
+                        <td><input id="m41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o41" class="cell" value=""></td>
+
+                        <td><input id="p41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q41" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r41" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d42" class="cell" oninput="input(this);" value="311"></td>
+                        <td><input id="e42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f42" class="cell" value=""></td>
+
+                        <td><input id="g42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i42" class="cell" value=""></td>
+
+                        <td><input id="j42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l42" class="cell" value=""></td>
+
+                        <td><input id="m42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o42" class="cell" value=""></td>
+
+                        <td><input id="p42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q42" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r42" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f43" class="cell" value=""></td>
+
+                        <td><input id="g43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i43" class="cell" value=""></td>
+
+                        <td><input id="j43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l43" class="cell" value=""></td>
+
+                        <td><input id="m43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o43" class="cell" value=""></td>
+
+                        <td><input id="p43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q43" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r43" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f44" class="cell" value=""></td>
+
+                        <td><input id="g44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i44" class="cell" value=""></td>
+
+                        <td><input id="j44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l44" class="cell" value=""></td>
+
+                        <td><input id="m44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o44" class="cell" value=""></td>
+
+                        <td><input id="p44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q44" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r44" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f45" class="cell" value=""></td>
+
+                        <td><input id="g45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i45" class="cell" value=""></td>
+
+                        <td><input id="j45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l45" class="cell" value=""></td>
+
+                        <td><input id="m45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o45" class="cell" value=""></td>
+
+                        <td><input id="p45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q45" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r45" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f46" class="cell" value=""></td>
+
+                        <td><input id="g46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i46" class="cell" value=""></td>
+
+                        <td><input id="j46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l46" class="cell" value=""></td>
+
+                        <td><input id="m46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o46" class="cell" value=""></td>
+
+                        <td><input id="p46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q46" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r46" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f47" class="cell" value=""></td>
+
+                        <td><input id="g47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i47" class="cell" value=""></td>
+
+                        <td><input id="j47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l47" class="cell" value=""></td>
+
+                        <td><input id="m47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o47" class="cell" value=""></td>
+
+                        <td><input id="p47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q47" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r47" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f48" class="cell" value=""></td>
+
+                        <td><input id="g48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i48" class="cell" value=""></td>
+
+                        <td><input id="j48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l48" class="cell" value=""></td>
+
+                        <td><input id="m48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o48" class="cell" value=""></td>
+
+                        <td><input id="p48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q48" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r48" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f49" class="cell" value=""></td>
+
+                        <td><input id="g49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i49" class="cell" value=""></td>
+
+                        <td><input id="j49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l49" class="cell" value=""></td>
+
+                        <td><input id="m49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o49" class="cell" value=""></td>
+
+                        <td><input id="p49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q49" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r49" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f50" class="cell" value=""></td>
+
+                        <td><input id="g50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i50" class="cell" value=""></td>
+
+                        <td><input id="j50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l50" class="cell" value=""></td>
+
+                        <td><input id="m50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o50" class="cell" value=""></td>
+
+                        <td><input id="p50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q50" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r50" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f51" class="cell" value=""></td>
+
+                        <td><input id="g51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i51" class="cell" value=""></td>
+
+                        <td><input id="j51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l51" class="cell" value=""></td>
+
+                        <td><input id="m51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o51" class="cell" value=""></td>
+
+                        <td><input id="p51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q51" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r51" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f52" class="cell" value=""></td>
+
+                        <td><input id="g52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i52" class="cell" value=""></td>
+
+                        <td><input id="j52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l52" class="cell" value=""></td>
+
+                        <td><input id="m52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o52" class="cell" value=""></td>
+
+                        <td><input id="p52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q52" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r52" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f53" class="cell" value=""></td>
+
+                        <td><input id="g53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i53" class="cell" value=""></td>
+
+                        <td><input id="j53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l53" class="cell" value=""></td>
+
+                        <td><input id="m53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o53" class="cell" value=""></td>
+
+                        <td><input id="p53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q53" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r53" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f54" class="cell" value=""></td>
+
+                        <td><input id="g54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i54" class="cell" value=""></td>
+
+                        <td><input id="j54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l54" class="cell" value=""></td>
+
+                        <td><input id="m54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o54" class="cell" value=""></td>
+
+                        <td><input id="p54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q54" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r54" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f55" class="cell" value=""></td>
+
+                        <td><input id="g55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i55" class="cell" value=""></td>
+
+                        <td><input id="j55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l55" class="cell" value=""></td>
+
+                        <td><input id="m55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o55" class="cell" value=""></td>
+
+                        <td><input id="p55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q55" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r55" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f56" class="cell" value=""></td>
+
+                        <td><input id="g56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i56" class="cell" value=""></td>
+
+                        <td><input id="j56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l56" class="cell" value=""></td>
+
+                        <td><input id="m56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o56" class="cell" value=""></td>
+
+                        <td><input id="p56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q56" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r56" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f57" class="cell" value=""></td>
+
+                        <td><input id="g57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i57" class="cell" value=""></td>
+
+                        <td><input id="j57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l57" class="cell" value=""></td>
+
+                        <td><input id="m57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o57" class="cell" value=""></td>
+
+                        <td><input id="p57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q57" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r57" class="cell" value=""></td>
+                        </tr><tr>
+
+                        <td><input id="d58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="e58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="f58" class="cell" value=""></td>
+
+                        <td><input id="g58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="h58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="i58" class="cell" value=""></td>
+
+                        <td><input id="j58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="k58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="l58" class="cell" value=""></td>
+
+                        <td><input id="m58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="n58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="o58" class="cell" value=""></td>
+
+                        <td><input id="p58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="q58" class="cell" oninput="input(this);" value=""></td>
+                        <td><input id="r58" class="cell" value=""></td>
+                        </tr><tr>
+                        <td class="band-col band-blue"><input id="b59" class="cell" value="400" readonly=""></td>
+                        <td class="band-col band-red"><input id="c59" class="cell" value="11" readonly=""></td>
+                        <td class="band-col band-green"><input id="gb59" class="cell" value="200" readonly=""></td>
+
+                        <td><input id="d59" class="cell" value="711" readonly=""></td>
+                        <td><input id="e59" class="cell" value="1200" readonly=""></td>
+                        <td><input id="f59" class="cell" value="" readonly=""></td>
+
+                        <td><input id="g59" class="cell" value="0" readonly=""></td>
+                        <td><input id="h59" class="cell" value="0" readonly=""></td>
+                        <td><input id="i59" class="cell" value="" readonly=""></td>
+
+                        <td><input id="j59" class="cell" value="0" readonly=""></td>
+                        <td><input id="k59" class="cell" value="0" readonly=""></td>
+                        <td><input id="l59" class="cell" value="0" readonly=""></td>
+
+                        <td><input id="m59" class="cell" value="0" readonly=""></td>
+                        <td><input id="n59" class="cell" value="0" readonly=""></td>
+                        <td><input id="o59" class="cell" value="" readonly=""></td>
+
+                        <td><input id="p59" class="cell" value="0" readonly=""></td>
+                        <td><input id="q59" class="cell" value="0" readonly=""></td>
+                        <td><input id="r59" class="cell" value="" readonly=""></td>
+                    </tr></table>
+    <table id="table8" class="tbl-excel" style="width:600px;"><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td style="text-align:left;"><b>stamp</b></td>
+                      <td style="text-align:left;"><b>to day</b></td>
+                      <td id="u42">3007</td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                    </tr>
+                    <tr>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td style="text-align:left;"><b>settle</b></td>
+                      <td style="text-align:left;"><b>to day</b></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value="5000"></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                    </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td colspan="2" style="text-align:left;"><b>total stamp</b></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                      <td colspan="2" style="text-align:left;"><b>total settle</b></td>
+                    </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr><tr>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                          <td><input type="text" class="cell" oninput="input(this);" value=""></td>
+                        </tr></table>
+  </div>
+
+  <!-- Minimal jQuery (1.8.x compatible) just for POST + DOM inject -->
+  <script>
+  (function(){
+    // tiny $ helper (works on very old jQuery-less pages)
+    function ajaxPost(url, data, cb){
+      var xhr=new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState===4){ cb(xhr.status, xhr.responseText); }
+      };
+      var body=[];
+      for(var k in data){
+        if(!data.hasOwnProperty(k)) continue;
+        body.push(encodeURIComponent(k)+'='+encodeURIComponent(data[k]));
+      }
+      xhr.send(body.join('&'));
+    }
+
+    function stripOuterTbody(html){
+      if(!html) return '';
+      return html.replace(/^\s*<tbody[^>]*>/i,'').replace(/<\/tbody>\s*$/i,'');
+    }
+    function stripPager(html){
+      // remove the pager row that includes "loadTable(5, ..." or "loadTable(2, ...)"
+      return (html||'').replace(
+        /<tr[^>]*>\s*<td[^>]*colspan\s*=\s*["']?9["']?[^>]*>.*?loadTable\((?:2|5)\s*,.*?<\/tr>/gis,
+        ''
+      );
+    }
+    function ensureInputsHaveValueAttr(html){
+      return (html||'').replace(/<input\b([^>]*)(?<!value="[^"]*")>/gi, function(tag, attrs){
+        // if tag already contains value= we keep it
+        if (/value\s*=/.test(tag)) return tag;
+        return tag.replace(/>$/, ' value="">');
+      });
+    }
+
+    var date = "2025-11-06";
+
+    var pending = 2; // we will expand t2 & t5, then print
+    function doneOne(){
+      pending--;
+      if (pending<=0){
+        // give the browser a tick to layout
+        setTimeout(function(){
+          window.print();
+          // optional: auto-close the print tab after a short delay
+          setTimeout(function(){ window.close && window.close(); }, 500);
+        }, 50);
+      }
+    }
+
+    // Expand TABLE 2 (full) for print only
+    ajaxPost('get_cash_in_out_content_ajax.php', {
+      date: date,
+      table_no: 2,
+      all: 1,
+      page: 1,
+      limit: 100000,
+      force: 1  // read from generator, not from saved
+    }, function(status, resp){
+      if (status===200 && resp){
+        var html = ensureInputsHaveValueAttr(stripPager(stripOuterTbody(resp)));
+        if (html){ document.getElementById('table2').innerHTML = html; }
+      }
+      doneOne();
+    });
+
+    // Expand TABLE 5 (full) for print only
+    ajaxPost('get_cash_in_out_content_ajax.php', {
+      date: date,
+      table_no: 5,
+      all: 1,
+      page: 1,
+      limit: 100000,
+      force: 1
+    }, function(status, resp){
+      if (status===200 && resp){
+        var html = ensureInputsHaveValueAttr(stripPager(stripOuterTbody(resp)));
+        if (html){ document.getElementById('table5').innerHTML = html; }
+      }
+      doneOne();
+    });
+
+  })();
+  </script>
+</body>
+</html>

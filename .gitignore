@@ -1,0 +1,9 @@
+*.zip
+*.rar
+*.sql
+/lms_demo
+/files/customer
+/lms_demo/files/customer
+/reject/document
+/files/customer_signatures
+/collection_photo/majusama_dev

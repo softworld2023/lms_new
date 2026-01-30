@@ -1,0 +1,52 @@
+<?php
+    include_once 'include/dbconnection.php';
+
+    if (isset($_POST)) {
+        $uid = $_POST['uid'];
+        $branch = strtoupper($_POST['branch']);
+        $subscription = $_POST['subscription'];
+
+        $db = '';
+        switch ($branch) {
+            case 'MJ':
+                $db = 'majusama' . $db_suffix;
+                break;
+            case 'MJ2':
+                $db = 'majusama2' . $db_suffix;
+                break;
+            case 'ANSENG':
+                $db = 'anseng' . $db_suffix;
+                break;
+            case 'YUWANG':
+                $db = 'yuwang' . $db_suffix;
+                break;
+            case 'KTL':
+                $db = 'ktl' . $db_suffix;
+                break;
+            case 'TSY':
+                $db = 'tsy' . $db_suffix;
+                break;
+            case 'TSY2':
+                $db = 'tsy2' . $db_suffix;
+                break;
+            case 'DK':
+                $db = 'dk' . $db_suffix;
+                break;
+        }
+
+        if ($db != '') {
+            mysql_select_db($db, $con);
+
+            $sql = "UPDATE $db.pwa_login SET subscription = '$subscription' WHERE uid = '$uid'";
+            $query = mysql_query($sql, $con);
+
+            if ($query) {
+                echo 'Subscription successful.';
+            } else {
+                echo 'Subscription failed.';
+            }
+
+            mysql_close($con);
+        }
+    }
+?>
