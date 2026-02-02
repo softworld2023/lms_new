@@ -882,8 +882,11 @@
 
             function logout() {
                 // Clear cookies
-                document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-                document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                // document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                // document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+                document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+
 
                 goToLogin();
             }

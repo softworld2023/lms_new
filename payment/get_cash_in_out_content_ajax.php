@@ -333,16 +333,47 @@
             $count = ($all === 1 || $total_pages <= 1) ? 3 : 4 ;
 
             $sqlCore = "SELECT
-                            t1.id, t1.loan_code, t3.customercode1, t3.customercode2, t1.month,
-                            t1.monthly_date AS created_date, t1.payout_amount,
-                            t1.payout_amount AS loan_amount, t1.user_id, t1.sd
+                            t1.id,
+                            t1.loan_code,
+                            t3.customercode1,
+                            t3.customercode2,
+                            t1.month,
+                            t1.monthly_date AS created_date,
+                            t1.payout_amount,
+                            t1.payout_amount AS loan_amount,
+                            t1.user_id,
+                            t1.sd,
+
+                            mpd.payment_date,
+                            mpd.created_date AS detail_created_date
+
                         FROM $db.monthly_payment_record t1
-                        LEFT JOIN $db.customer_loanpackage t2 ON t2.loan_code = t1.loan_code
-                        LEFT JOIN $db.customer_details t3 ON t3.id = t1.customer_id
-                        WHERE (t1.closing_status != 'YES' OR t1.closing_status IS NULL)
+
+                        LEFT JOIN $db.customer_loanpackage t2
+                            ON t2.loan_code = t1.loan_code
+
+                        LEFT JOIN $db.customer_details t3
+                            ON t3.id = t1.customer_id
+
+                        LEFT JOIN $db.monthly_payment_details mpd
+                            ON mpd.mprid = t1.id
+                        AND mpd.created_date = (
+                                SELECT MAX(d.created_date)
+                                FROM $db.monthly_payment_details d
+                                WHERE d.mprid = t1.id
+                        )
+
+                        WHERE
+                            (t1.closing_status != 'YES' OR t1.closing_status IS NULL)
                             AND t1.monthly_date > '2025-11-01'
                             AND t1.status != 'DELETED'
-                        ORDER BY t1.datetime DESC";
+
+                        ORDER BY
+                        t1.monthly_date ASC,
+                        t1.datetime ASC,
+                        t1.id ASC";
+
+            // var_dump($sqlCore);
             $sql = ($all === 1 || $total_pages <= 1)
                     ? $sqlCore
                     : $sqlCore . " LIMIT $limit OFFSET $offset";
@@ -514,7 +545,11 @@
                         WHERE t1.loan_status = 'Paid'
                             AND (t1.closing_status != 'YES' OR t1.closing_status IS NULL)
                             AND t1.payout_date > '2025-11-01'
-                        ORDER BY t1.datetime DESC";
+                        ORDER BY
+                            t1.payout_date ASC,
+                            t1.datetime ASC,
+                            t1.id ASC
+                        ";
             $sql = ($all === 1 || $total_pages <= 1)
                     ? $sqlCore
                     : $sqlCore . " LIMIT $limit OFFSET $offset";

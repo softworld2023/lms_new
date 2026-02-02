@@ -615,9 +615,14 @@
                         // console.log(status);
                         if (status == 'success') {
                             // Set a cookie with an expiry date (e.g., 20 years from now)
+                            //let expires = new Date(Date.now() + 20 * 365 * 24 * 60 * 60 * 1000).toUTCString();
+                            //document.cookie = `lms_collection_username=${username}; expires=${expires}`;
+                            //document.cookie = `lms_collection_branch=${branch}; expires=${expires}`;
                             let expires = new Date(Date.now() + 20 * 365 * 24 * 60 * 60 * 1000).toUTCString();
-                            document.cookie = `lms_collection_username=${username}; expires=${expires}`;
-                            document.cookie = `lms_collection_branch=${branch}; expires=${expires}`;
+
+                            document.cookie = `lms_collection_username=${encodeURIComponent(username.trim())}; expires=${expires}; path=/`;
+                            document.cookie = `lms_collection_branch=${encodeURIComponent(branch.trim())}; expires=${expires}; path=/`;
+
                             goToCollection();
                         } else {
                             showSnackbar('Login failed');
@@ -921,8 +926,11 @@
 
             function logout() {
                 // Clear cookies
-                document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-                document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                // document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                // document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+                document.cookie = 'lms_collection_username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+                document.cookie = 'lms_collection_branch=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+
 
                 goToLogin();
             }
