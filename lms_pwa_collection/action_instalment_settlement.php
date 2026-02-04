@@ -74,7 +74,7 @@ if(isset($_POST['add_settle']))
 									'".$next_month."', 
 									0, 
 									0, 
-									'".date('Y-m-d H:i:s')."', 
+									'".NOW()."', 
 									'".$_SESSION['taplogin_id']."', 
 									'".$_SESSION['taplogin_id']."', 
 									'APPROVED'

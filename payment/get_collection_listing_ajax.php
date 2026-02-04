@@ -57,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // $sql .= " AND customer_details.name LIKE '%" . mysql_real_escape_string($customer_name) . "%'";
     }
 
-    $sql .= " ORDER BY collection.id ASC";
+    $sql .= " ORDER BY collection.datetime ASC, collection.id ASC";
+
 
     $query = mysql_query($sql);
 
@@ -89,10 +90,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $salary          = $row['salary'];
             $salary_type     = $row['salary_type'];
             $instalment      = (!empty($row['collection_amount']) && $row['collection_amount'] > 0) ? $row['collection_amount'] : $row['instalment'];
+            $instalment_month= $row['instalment_month'];
             $instalment_type = $row['instalment_type'];
 
             $tepi1           = $row['tepi1'];
+            if($tepi1 != 0){
+                $tepi1_month     = $row['tepi1_month'];
+            }else{
+                $tepi1_month     = '-';
+            }
             $tepi2           = $row['tepi2'];
+            if($tepi2 != 0){
+                $tepi2_month     = $row['tepi2_month'];
+            }else{
+                $tepi2_month     = '-';
+            }
             $tepi2_bunga     = $row['tepi2_bunga'];
             $balance_received= $row['balance_received'];
 
@@ -193,22 +205,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Salary/instalment columns (kept from your logic)
             if ($salary_type == 'Gaji' && $instalment_type != 'Monthly') {
-                $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($salary, 2) . '(' . $salary_type . ')</b></td>
+                $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($salary, 2) . ' (' . $salary_type . ')</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($instalment, 2) . ' (' . $instalment_type . ')</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi1, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi1_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2_bunga, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi2_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($balance_received, 2) . '</b></td>';
             } else if ($salary_type == 'Short') {
                 $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>Short</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($instalment, 2) . ' (' . $instalment_type . ')</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi1, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi1_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2_bunga, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi2_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>';
             } else if ($salary_type == 'Bad Debt') {
                 $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>Bad Debt</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($instalment, 2) . ' (' . $instalment_type . ')</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_month . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
@@ -216,23 +237,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else if ($salary_type == 'settlement') {
                 $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>Settlement</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($instalment, 2) . ' (' . $instalment_type . ')</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi1, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi1_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2_bunga, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi2_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($balance_received, 2) . '</b></td>';
             } else if ($salary_type == 'Gaji' && $instalment_type == 'Monthly') {
-                $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($salary, 2) . '(' . $salary_type . ')</b></td>
+                $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($salary, 2) . ' (' . $salary_type . ')</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_type . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>-</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi1, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi1_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2_bunga, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi2_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($balance_received, 2) . '</b></td>';
             } else {
                 $html .= '<td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($salary, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($instalment, 2) . ' (' . $instalment_type . ')</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $instalment_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi1, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi1_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2, 2) . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($tepi2_bunga, 2) . '</b></td>
+                          <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>' . $tepi2_month . '</b></td>
                           <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;"><b>RM ' . number_format($balance_received, 2) . '</b></td>';
             }
 

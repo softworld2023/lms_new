@@ -6,6 +6,7 @@ include_once '../include/dbconnection.php';
 session_start();
 
 if (isset($_POST)) {
+
     // =============================
     //      Initialize Filters
     // =============================
@@ -27,7 +28,7 @@ if (isset($_POST)) {
     function getLoanStyle($loanCode) {
         $prefix = strtoupper(substr($loanCode, 0, 2));
 
-        $valid = array('SD','AS','SB','BP','KT','MS','MJ','PP','NG','TS','LT','BT','DK');
+        $valid = array('SD','AS','SB','BP','KT','MS','MJ','PP','NG','TS','LT','BT','DK','CL');
 
         if ($prefix == 'SD') {
             return '';
@@ -55,14 +56,12 @@ if (isset($_POST)) {
         return htmlspecialchars($loanCode, ENT_QUOTES, 'UTF-8');
     }
 
-
     // =============================
     //  Get Initial Closing Balance
     // =============================
-    $sql = "SELECT
-                initial_closing_balance_monthly
+    $sql = "SELECT initial_closing_balance_monthly
             FROM $db.account_book_monthly
-            WHERE year = '$selected_year' 
+            WHERE year = '$selected_year'
               AND month = '$selected_month'";
     $q   = mysql_query($sql);
     $res = mysql_fetch_assoc($q);
@@ -71,13 +70,11 @@ if (isset($_POST)) {
         ? (float)$res['initial_closing_balance_monthly']
         : 0.0;
 
-    $current_closing_balance = 0.0;
-
     // ======================================================
     // 1) BUILD CREDIT SUBQUERY
-    //    - From monthly_payment_record
-    //    - only PAID/FINISHED with payout_date in this month
     //    - CREDIT = payout_amount * 0.9
+    //    - sort_dt should follow mpr.datetime (created time),
+    //      fallback to payout_date
     // ======================================================
     $sqlCredit = "
         SELECT
@@ -86,15 +83,21 @@ if (isset($_POST)) {
             cd.name,
             0 AS debit,
             (mpr.payout_amount * 0.9) AS credit,
-            mpr.payout_date AS tx_date
-        FROM
-            $db.monthly_payment_record mpr
-        LEFT JOIN
-            $db.customer_loanpackage cl 
-                ON cl.loan_code = mpr.loan_code
-        LEFT JOIN
-            $db.customer_details cd 
-                ON cd.id = mpr.customer_id
+            mpr.payout_date AS tx_date,
+
+            -- MAIN SORT KEY (follow record datetime if available)
+            CASE
+                WHEN mpr.datetime IS NOT NULL
+                     AND mpr.datetime <> '0000-00-00 00:00:00'
+                THEN mpr.datetime
+                ELSE mpr.payout_date
+            END AS sort_dt
+
+        FROM $db.monthly_payment_record mpr
+        LEFT JOIN $db.customer_loanpackage cl
+            ON cl.loan_code = mpr.loan_code
+        LEFT JOIN $db.customer_details cd
+            ON cd.id = mpr.customer_id
         WHERE
             mpr.status IN ('PAID','FINISHED')
             AND mpr.payout_date IS NOT NULL
@@ -113,22 +116,29 @@ if (isset($_POST)) {
 
     // ======================================================
     // 2) BUILD DEBIT SUBQUERY
-    //    - From return_book_monthly + collection
-    //    - Grouped by loan_code (to avoid duplicates)
-    //    - tepi1/tepi2 summed per loan_code for that month
-    //    - DEBIT = tepi1 + tepi2
-    //    - Use first_datetime (earliest) as tx_date
+    //    - DEBIT = tepi1 + tepi2 (from collection)
+    //    - sort_dt should follow collection.datetime (MAX per loan_code in month)
+    //      fallback to rbm first_datetime
     // ======================================================
     $sqlDebit = "
-        SELECT 
+        SELECT
             rbm_agg.loan_code,
             cd.customercode2,
             cd.name,
             (COALESCE(col_agg.sum_tepi1,0) + COALESCE(col_agg.sum_tepi2,0)) AS debit,
             0 AS credit,
-            rbm_agg.first_datetime AS tx_date
+            rbm_agg.first_datetime AS tx_date,
+
+            -- MAIN SORT KEY: collection.datetime if exists
+            CASE
+                WHEN col_agg.max_collection_datetime IS NOT NULL
+                     AND col_agg.max_collection_datetime <> '0000-00-00 00:00:00'
+                THEN col_agg.max_collection_datetime
+                ELSE rbm_agg.first_datetime
+            END AS sort_dt
+
         FROM (
-            SELECT 
+            SELECT
                 loan_code,
                 MIN(datetime) AS first_datetime
             FROM $db.return_book_monthly
@@ -136,26 +146,31 @@ if (isset($_POST)) {
               AND month = '$selected_month'
             GROUP BY loan_code
         ) rbm_agg
+
         LEFT JOIN (
-            SELECT 
+            SELECT
                 loan_code,
                 SUM(tepi1) AS sum_tepi1,
-                SUM(tepi2) AS sum_tepi2
+                SUM(tepi2) AS sum_tepi2,
+                MAX(`datetime`) AS max_collection_datetime
             FROM $db.collection
             WHERE tepi1_month = '$selected_year_month'
             GROUP BY loan_code
         ) col_agg
             ON col_agg.loan_code = rbm_agg.loan_code
+
         LEFT JOIN (
-            SELECT 
+            SELECT
                 loan_code,
                 MAX(customer_id) AS customer_id
             FROM $db.monthly_payment_record
             GROUP BY loan_code
         ) mpr_agg
             ON mpr_agg.loan_code = rbm_agg.loan_code
-        LEFT JOIN $db.customer_details cd 
+
+        LEFT JOIN $db.customer_details cd
             ON cd.id = mpr_agg.customer_id
+
         WHERE 1 = 1
     ";
 
@@ -171,7 +186,8 @@ if (isset($_POST)) {
 
     // ======================================================
     // 3) MERGE CREDIT + DEBIT WITH UNION ALL
-    //    Then order by tx_date (old -> new), then loan_code
+    //    Order by sort_dt (collection.datetime priority),
+    //    then tx_date, then loan_code
     // ======================================================
     $sqlMerged = "
         SELECT *
@@ -180,15 +196,16 @@ if (isset($_POST)) {
             UNION ALL
             $sqlDebit
         ) t
-        ORDER BY 
-            t.tx_date ASC,
+        ORDER BY
+            t.sort_dt ASC,
+            t.tx_date  ASC,
             t.loan_code ASC
     ";
 
     $query = mysql_query($sqlMerged);
 
     // ======================================================
-    // 4) LOOP ONCE AND CALCULATE RUNNING BALANCE
+    // 4) LOOP AND CALCULATE RUNNING BALANCE
     // ======================================================
     $html  = '';
     $count = 0;
@@ -197,47 +214,50 @@ if (isset($_POST)) {
     while ($row = mysql_fetch_assoc($query)) {
 
         $loanStyle   = getLoanStyle($row['loan_code']);
-        $loan_code   = formatLoanCode($row['loan_code']);
+        $loan_code_f = formatLoanCode($row['loan_code']);
         $customer_id = htmlspecialchars($row['customercode2'], ENT_QUOTES, 'UTF-8');
         $name        = htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8');
-
-        $tx_date     = $row['tx_date'];
 
         $debit  = isset($row['debit'])  ? (float)$row['debit']  : 0.0;
         $credit = isset($row['credit']) ? (float)$row['credit'] : 0.0;
 
-        // update running balance
+        // update running balance (keep your logic)
         $current_closing_balance -= $debit;
         $current_closing_balance += $credit;
 
-        $count++;
+        // show datetime so user can see ordering difference
+        $show_dt = isset($row['sort_dt']) ? $row['sort_dt'] : $row['tx_date'];
+        $show_dt_fmt = $show_dt ? date('d/m/Y', strtotime($show_dt)) : '';
 
-        // only show rows that actually have movement (optional; remove if you want all)
         if ($debit != 0 || $credit != 0) {
-            $html .= '<tr>
-                        <td style="border-right:1px solid black;border-bottom:1px solid black;border-left:1px solid black;text-align:center;">' . $count . '</td>
+            $count++;
 
-                        <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;' . $loanStyle . '">
-                            <b>' . $loan_code . '</b>
+            $html .= '<tr>
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;border-left:1px solid black;text-align:center;">' . $count . '</td>
+
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;text-align:center;color:black;">
+                            <b>' . $show_dt_fmt . '</b>
                         </td>
 
                         <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;' . $loanStyle . '">
+                            <b>' . $loan_code_f . '</b>
+                        </td>
+
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;text-align:center;">
                             <b>' . $customer_id . '</b>
                         </td>
 
-                        <td style="border-right:1px solid black;border-bottom:1px solid black;">
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;">
                             <b>RM ' . number_format($debit, 2) . '</b>
                         </td>
 
-                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:red;">
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:black;">
                             <b>RM ' . number_format($credit, 2) . '</b>
                         </td>
-
-                        <td style="border-right:1px solid black;border-bottom:1px solid black;">
+                        <td style="border-right:1px solid black;border-bottom:1px solid black;color:red;">
                             <b>RM ' . number_format($current_closing_balance, 2) . '</b>
                         </td>
                     </tr>';
-
         }
     }
 
@@ -250,9 +270,6 @@ if (isset($_POST)) {
         </tr>';
     }
 
-    // =============================
-    //        Output Final HTML
-    // =============================
     header('Content-Type: text/html');
     echo $html;
     exit;

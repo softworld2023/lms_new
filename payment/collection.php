@@ -172,21 +172,24 @@ if (strtotime($date_from) > strtotime($date_to)) {
   </tr>
 </table>
 
-<table width="1280" id="tbl-collection">
+<table width="1400" id="tbl-collection">
   <thead>
     <tr>
       <th width="2%"  style="border:1px solid black; padding-left: 2px; padding-right: 2px; text-align: center;">No.</th>
-      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Collection Date</th>
-      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Agreement No.</th>
-      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Customer ID</th>
-      <th width="15%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Customer Name</th>
-      <th width="12%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Salary</th>
-      <th width="14%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Instalment</th>
-      <th width="8%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 1</th>
-      <th width="8%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 2</th>
-      <th width="7%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 2 (Bunga)</th>
-      <th width="8%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Balance Received</th>
-      <th width="13%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Action</th>
+      <th width="6%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Collection Date</th>
+      <th width="6%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Agreement No.</th>
+      <th width="6%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Cust. ID</th>
+      <th width="11%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Cust. Name</th>
+      <th width="7%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Salary</th>
+      <th width="7%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Instalment</th>
+      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Month</th>
+      <th width="7%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 1</th>
+      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi1 Month</th>
+      <th width="7%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 2</th>
+      <th width="6%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi 2 (Bunga)</th>
+      <th width="5%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Tepi2 Month</th>
+      <th width="7%"  style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Balance Received</th>
+      <th width="9%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Action</th>
     </tr>
   </thead>
   <tbody></tbody>
@@ -395,5 +398,12 @@ function deleteCollection(collectionId) {
       success: function() { window.location.reload(); }
     });
   }
+}
+
+function deleteBadDebt(bad_debt_id) {
+    console.log(bad_debt_id);
+    if (confirm('Confirm delete this bad debt?')) {
+        window.location.href = 'payLateInt.php?id=' + bad_debt_id;
+    }
 }
 </script>

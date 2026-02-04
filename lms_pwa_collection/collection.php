@@ -1,9 +1,10 @@
 <?php
 include_once 'include/dbconnection.php';
 
-ini_set( 'display_errors', 1 );
-ini_set( 'display_startup_errors', 1 );
-error_reporting( E_ALL );
+// ini_set( 'display_errors', 1 );
+// ini_set( 'display_startup_errors', 1 );
+// error_reporting( E_ALL );
+mysql_query("SET TIME_ZONE = '+08:00'");
 $branch = strtoupper( $_POST[ 'branch' ] );
 $db = '';
 switch ( $branch ) {

@@ -413,7 +413,8 @@
         </tr>
         <tr>
             <th width="10%" style="border:1px solid black; padding-left: 2px; padding-right: 2px; text-align: center;">No.</th>
-            <th width="20%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Agreement No.</th>
+            <th width="10%" style="border:1px solid black; padding-left: 2px; padding-right: 2px; text-align: center;">Date</th>
+            <th width="10%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Agreement No.</th>
             <th width="10%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black; text-align: center;">Customer ID</th>
             <th width="20%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Debit +</th>
             <th width="20%" style="border-right:1px solid black;border-bottom: 1px solid black;border-top:1px solid black;">Credit -</th>

@@ -62,7 +62,7 @@
             }
 
             $sql .= " ORDER BY t2.approval_date DESC LIMIT 1";
-                
+            // var_dump($sql); 
             $query = mysql_query($sql);
             if (mysql_num_rows($query) == 1) {
                 $result = mysql_fetch_assoc($query);

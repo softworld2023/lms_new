@@ -145,7 +145,7 @@ else if (isset($_POST['pay_Monthly'])) {
 						tepi2_month = '0',
 						tepi2_bunga = '0',
 						balance_received = '0',
-						datetime = '".date('Y-m-d H:i:s')."',
+						datetime = '".NOW()."', 
 						submitted_by_id = '$user_id',
 						approved_by_id = '$user_id',
 						status = 'PENDING'";
